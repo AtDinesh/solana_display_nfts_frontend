@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from "react"
 import styles from "../styles/custom.module.css"
 
 export const FetchCandyMachine: FC = () => {
-  const [candyMachineAddress, setCandyMachineAddress] = useState(null)
+  const [candyMachineAddress, setCandyMachineAddress] = useState("CgAajBuhy2k8EtqfkBPTmuAFK8HSodkFvRN6ump5kqiQ")
   const [candyMachineData, setCandyMachineData] = useState(null)
   const [pageItems, setPageItems] = useState(null)
   const [page, setPage] = useState(1)
