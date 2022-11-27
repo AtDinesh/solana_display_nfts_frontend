@@ -10,6 +10,9 @@ export const FetchCandyMachine: FC = () => {
   const [pageItems, setPageItems] = useState(null)
   const [page, setPage] = useState(1)
 
+  const { connection } = useConnection()
+  const metaplex = Metaplex.make(connection)
+
   const fetchCandyMachine = async () => {}
 
   const getPage = async (page, perPage) => {}
