@@ -32,5 +32,10 @@ export const FetchNft: FC = () => {
     setNftData(nftData)
   }
 
+  // fetch nfts when connected wallet changes
+  useEffect(() => {
+    fetchNfts()
+  }, [wallet])
+
   return <div></div>
 }
