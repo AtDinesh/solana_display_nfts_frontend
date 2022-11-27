@@ -13,7 +13,23 @@ export const FetchCandyMachine: FC = () => {
   const { connection } = useConnection()
   const metaplex = Metaplex.make(connection)
 
-  const fetchCandyMachine = async () => {}
+  // fetch candymachine by address
+  const fetchCandyMachine = async () => {
+    
+    // Set page to 1 - we wanna be at the first page whenever we fetch a new Candy Machine
+    setPage(1)
+
+    // fetch candymachine data
+    try {
+      const candyMachine = await metaplex
+        .candyMachinesV2()
+        .findByAddress({ address: new PublicKey(candyMachineAddress) })
+
+      setCandyMachineData(candyMachine)
+    } catch (e) {
+      alert("Please submit a valid CMv2 address.")
+    }
+  }
 
   const getPage = async (page, perPage) => {}
 
