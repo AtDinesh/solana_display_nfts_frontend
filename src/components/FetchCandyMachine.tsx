@@ -31,7 +31,23 @@ export const FetchCandyMachine: FC = () => {
     }
   }
 
-  const getPage = async (page, perPage) => {}
+  const getPage = async (page, perPage) => {
+    const pageItems = candyMachineData.items.slice(
+      (page - 1) * perPage,
+      page * perPage
+    )
+
+    // fetch metadata of NFTs for page
+    let nftData = []
+    for (let i = 0; i < pageItems.length; i++) {
+      let fetchResult = await fetch(pageItems[i].uri)
+      let json = await fetchResult.json()
+      nftData.push(json)
+    }
+
+    // set state
+    setPageItems(nftData)
+  }
 
   const prev = async () => {}
 
