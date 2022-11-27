@@ -31,6 +31,10 @@ export const FetchCandyMachine: FC = () => {
     }
   }
 
+  // here we're slicing the items array into chunks.
+  // Then we're fetching the metadata for each NFT 
+  // in the page and storing it in nftData;
+  //  at any time our app will only render the NFTs for the current page
   const getPage = async (page, perPage) => {
     const pageItems = candyMachineData.items.slice(
       (page - 1) * perPage,
