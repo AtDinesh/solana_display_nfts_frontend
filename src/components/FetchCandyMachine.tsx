@@ -53,9 +53,19 @@ export const FetchCandyMachine: FC = () => {
     setPageItems(nftData)
   }
 
-  const prev = async () => {}
+  // previous page
+  const prev = async () => {
+    if (page - 1 < 1) {
+      setPage(1)
+    } else {
+      setPage(page - 1)
+    }
+  }
 
-  const next = async () => {}
+  // next page
+  const next = async () => {
+    setPage(page + 1)
+  }
 
   return (
     <div>
