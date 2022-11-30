@@ -22,12 +22,13 @@ export const FetchCandyMachine: FC = () => {
     // fetch candymachine data
     try {
       const candyMachine = await metaplex
-        .candyMachinesV2()
+        .candyMachines()
         .findByAddress({ address: new PublicKey(candyMachineAddress) })
+        .run()
 
       setCandyMachineData(candyMachine)
     } catch (e) {
-      alert("Please submit a valid CMv2 address.")
+      alert(`Please submit a valid CMv2 address: ${candyMachineAddress}`)
     }
   }
 
@@ -66,6 +67,25 @@ export const FetchCandyMachine: FC = () => {
   const next = async () => {
     setPage(page + 1)
   }
+
+  // we need a few useEffect. Here is the whole process:
+  /*
+    1. On page load run the fetchCandyMachine function (if candyMachineAddress is not empty)
+    2. Whenever fetching a candy machine with fetchCandyMachine, set page to 1 so you get the first page.
+    3. Whenever candyMachineData or page changes (i.e. new CM address entered or next.prev button clicked), load the page
+  */
+  // fetch placeholder candy machine on load
+  useEffect(() => {
+    fetchCandyMachine()
+  }, [])
+
+  // fetch metadata for NFTs when page or candy machine changes
+  useEffect(() => {
+    if (!candyMachineData) {
+      return
+    }
+    getPage(page, 9)
+  }, [candyMachineData, page])
 
   return (
     <div>
